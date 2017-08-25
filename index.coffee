@@ -3,6 +3,7 @@ fs = require 'fs'
 readline = require 'linebyline'
 download = require 'download'
 moment = require 'moment'
+validator = require 'validator'
 config = require './config'
 
 convert = (str) ->
@@ -11,7 +12,7 @@ convert = (str) ->
     stp = _.replace str, '\t', ' '
     strArray = _.compact (_.split stp, ' ')
 
-    if strArray.length > 1
+    if strArray.length > 1 and validator.isURL strArray[1]
       policy = strArray[1] + ' = ' + strArray[0] + '\n'
     else '\n'
   else policy
